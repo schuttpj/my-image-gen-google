@@ -1,4 +1,4 @@
-# Custom DALL-E Image Generation Tool for GPTScript
+# Custom Google Image Generation Tool for GPTScript
 
 This tool provides a simple interface for generating images using OpenAI's DALL-E models through GPTScript. It allows you to easily integrate image generation capabilities into your GPTScript workflows.
 
@@ -19,8 +19,8 @@ This tool provides a simple interface for generating images using OpenAI's DALL-
 
 1. Clone this repository:
 ```
-git clone https://github.com/YOUR_USERNAME/my-dalle-tool.git
-cd my-dalle-tool
+git clone https://github.com/schuttpj/my-image-gen-google.git
+cd my-image-gen-google
 ```
 
 2. Install the required Python packages:
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 You can use this tool in your GPTScript files by referencing it:
 
 ```
-tools: github.com/YOUR_USERNAME/my-dalle-tool
+tools: github.com/schuttpj/my-image-gen-google
 
 You are an expert in image generation. Generate an image of a futuristic city with flying cars.
 ```
@@ -53,7 +53,7 @@ The tool supports several parameters:
 Example usage in a GPTScript:
 
 ```
-tools: github.com/YOUR_USERNAME/my-dalle-tool
+tools: github.com/schuttpj/my-image-gen-google
 
 Generate an image of a serene mountain landscape with a lake reflecting the sunset.
 Use the dall-e-3 model with high quality.
