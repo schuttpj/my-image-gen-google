@@ -1,18 +1,18 @@
-# Custom Google Image Generation Tool for GPTScript
+# Custom Google Imagen Generation Tool for GPTScript
 
-This tool provides a simple interface for generating images using OpenAI's DALL-E models through GPTScript. It allows you to easily integrate image generation capabilities into your GPTScript workflows.
+This tool provides a simple interface for generating images using Google's Imagen model through GPTScript. It allows you to easily integrate high-quality image generation capabilities into your GPTScript workflows.
 
 ## Features
 
-* Supports both DALL-E 3 and DALL-E 2 models
-* Configurable image size, quality, and quantity
+* Uses Google's advanced Imagen image generation model
+* Configurable image size and quantity
 * Easy integration with GPTScript
 * Simple API key management
 
 ## Prerequisites
 
 * Python 3.x
-* OpenAI API key
+* Google Gemini API key (for access to Imagen)
 * GPTScript installed
 
 ## Installation
@@ -45,9 +45,8 @@ The tool supports several parameters:
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | prompt | The text prompt for image generation | (Required) |
-| model | Model to use ("dall-e-3" or "dall-e-2") | "dall-e-3" |
+| model | Model to use (default: "imagen-3.0-generate-002") | "imagen-3.0-generate-002" |
 | size | Image size (e.g., "1024x1024") | "1024x1024" |
-| quality | Image quality ("standard" or "hd") | "standard" |
 | number | Number of images to generate | 1 |
 
 Example usage in a GPTScript:
@@ -56,20 +55,19 @@ Example usage in a GPTScript:
 tools: github.com/schuttpj/my-image-gen-google
 
 Generate an image of a serene mountain landscape with a lake reflecting the sunset.
-Use the dall-e-3 model with high quality.
+Use high quality settings.
 
 Parameters:
-- model: dall-e-3
-- quality: hd
+- model: imagen-3.0-generate-002
 - size: 1024x1024
 ```
 
 ## Authentication
 
-An OpenAI API key is required. When running with GPTScript, the credential tool will prompt you to provide a key if not already set. You can also set it as an environment variable:
+A Google Gemini API key is required. When running with GPTScript, the credential tool will prompt you to provide a key if not already set. You can also set it as an environment variable:
 
 ```
-export OPENAI_API_KEY="your-api-key-here"
+export GEMINI_API_KEY="your_gemini_api_key_here"
 ```
 
 ## Direct CLI Usage
@@ -77,17 +75,21 @@ export OPENAI_API_KEY="your-api-key-here"
 You can also use the tool directly from the command line:
 
 ```
-python cli.py --api-key YOUR_API_KEY --prompt "Your text prompt here" --model dall-e-3 --size 1024x1024 --quality hd --number 1
+python cli.py --api-key YOUR_GEMINI_API_KEY --prompt "Your text prompt here" --model imagen-3.0-generate-002 --size 1024x1024 --number 1
 ```
 
-## Example Images
+## Testing
 
-See the examples directory for sample usage and resulting images.
+To test the Google Imagen integration:
 
-## License
+```
+# Set your API key
+export GEMINI_API_KEY="your_gemini_api_key_here"
 
-This project is based on the GPTScript dalle-image-generation tool and is provided under the same license.
+# Run the test script
+python scripts/test-imagen.py
+```
 
 ## Acknowledgments
 
-This tool is a customized fork of the [gptscript-ai/dalle-image-generation](https://github.com/gptscript-ai/dalle-image-generation) repository.
+This tool is based on the GPTScript dalle-image-generation tool and has been modified to use Google's Imagen model.
