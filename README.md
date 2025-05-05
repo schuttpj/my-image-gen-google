@@ -1,95 +1,90 @@
-# Custom Google Imagen Generation Tool for GPTScript
+# Google Imagen/Gemini Image Generation Tool
 
-This tool provides a simple interface for generating images using Google's Imagen model through GPTScript. It allows you to easily integrate high-quality image generation capabilities into your GPTScript workflows.
+This GPTScript tool allows you to generate images using Google's Imagen and Gemini image generation models. It can be used as a standalone tool or integrated with the story-book application.
 
 ## Features
 
-* Uses Google's advanced Imagen image generation model
-* Configurable image size and quantity
-* Easy integration with GPTScript
-* Simple API key management
+- Support for Google's Imagen 3 model (`imagen-3.0-generate-002`)
+- Support for Google's Gemini model (`gemini-2.0-flash-exp-image-generation`)
+- Configurable image aspect ratio (1:1, 16:9, etc.)
+- Adjustable number of images to generate
+- Direct integration with the story-book.gpt script
 
 ## Prerequisites
 
-* Python 3.x
-* Google Gemini API key (for access to Imagen)
-* GPTScript installed
+- Python 3.8 or higher
+- A Google API key with access to Imagen/Gemini models
+- Required Python packages (see requirements.txt)
 
 ## Installation
 
-1. Clone this repository:
-```
-git clone https://github.com/schuttpj/my-image-gen-google.git
-cd my-image-gen-google
-```
+1. Clone this repository
+2. Install the required dependencies:
 
-2. Install the required Python packages:
-```
+```bash
+cd my-dalle-tool
 pip install -r requirements.txt
 ```
 
-## Usage with GPTScript
+3. Set your Google API key as an environment variable:
 
-You can use this tool in your GPTScript files by referencing it:
-
-```
-tools: github.com/schuttpj/my-image-gen-google
-
-You are an expert in image generation. Generate an image of a futuristic city with flying cars.
+```bash
+export GEMINI_API_KEY=your_api_key_here
 ```
 
-### Customizing Image Generation
+## Usage
 
-The tool supports several parameters:
+### Command Line Interface
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| prompt | The text prompt for image generation | (Required) |
-| model | Model to use (default: "imagen-3.0-generate-002") | "imagen-3.0-generate-002" |
-| size | Image size (e.g., "1024x1024") | "1024x1024" |
-| number | Number of images to generate | 1 |
+Generate an image using the default Gemini model:
 
-Example usage in a GPTScript:
-
-```
-tools: github.com/schuttpj/my-image-gen-google
-
-Generate an image of a serene mountain landscape with a lake reflecting the sunset.
-Use high quality settings.
-
-Parameters:
-- model: imagen-3.0-generate-002
-- size: 1024x1024
+```bash
+python cli.py --prompt="A serene lake at sunset with mountains in the background"
 ```
 
-## Authentication
+Generate an image using Imagen with specific parameters:
 
-A Google Gemini API key is required. When running with GPTScript, the credential tool will prompt you to provide a key if not already set. You can also set it as an environment variable:
-
-```
-export GEMINI_API_KEY="your_gemini_api_key_here"
+```bash
+python cli.py --prompt="A spaceship flying through a nebula" --model="imagen-3.0-generate-002" --size="16:9" --number="2"
 ```
 
-## Direct CLI Usage
+### Integration with story-book
 
-You can also use the tool directly from the command line:
+To use this tool with the story-book application:
+
+1. Make sure the tool is referenced in your `story-book.gpt` file
+2. Set the `NUXT_USE_GEMINI` environment variable in your `.env` file:
 
 ```
-python cli.py --api-key YOUR_GEMINI_API_KEY --prompt "Your text prompt here" --model imagen-3.0-generate-002 --size 1024x1024 --number 1
+NUXT_USE_GEMINI=true
 ```
+
+3. Ensure your `GEMINI_API_KEY` is set in the environment
 
 ## Testing
 
-To test the Google Imagen integration:
+You can run the integration test script to verify everything is working:
 
-```
-# Set your API key
-export GEMINI_API_KEY="your_gemini_api_key_here"
-
-# Run the test script
-python scripts/test-imagen.py
+```bash
+cd my-dalle-tool
+./scripts/integration-test.sh
 ```
 
-## Acknowledgments
+This will test both Imagen and Gemini models and update the `.env` file to use Google's models.
 
-This tool is based on the GPTScript dalle-image-generation tool and has been modified to use Google's Imagen model.
+## Differences from OpenAI's DALL-E
+
+1. Google's API returns base64-encoded images rather than URLs
+2. The format for specifying image size is different (aspect ratio vs. dimensions)
+3. Different model names and capabilities
+4. The story-book application has been modified to handle both formats
+
+## Troubleshooting
+
+- If you encounter "API key not valid" errors, make sure your `GEMINI_API_KEY` is set correctly
+- If image generation fails, check that you have access to the Imagen/Gemini models in your Google API account
+- For more issues, run the test script in the `scripts` directory to diagnose problems
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
